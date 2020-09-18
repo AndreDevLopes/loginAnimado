@@ -1,17 +1,63 @@
 
-import React from 'react';
-import { KeyboardAvoidingView , View , Image , TextInput ,TouchableOpacity , Text , StyleSheet} from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import React,{useState, useEffect} from 'react';
+import {
+        KeyboardAvoidingView,
+        View,
+        Image,
+        TextInput,
+        TouchableOpacity,
+        Text,
+        StyleSheet,
+        Animated,
+      } from 'react-native';
+
 
 export default function App() {
+  const [offset]= useState(new Animated.ValueXY({x:0,y:80}));
+  const [opacity] = useState(new Animated.Value(0));
+  const [logo] = useState(new Animated.ValueXY({x:130 , y:155}));
+  useEffect(()=>{
+    
+
+    Animated.parallel([
+      Animated.spring(offset.y,{
+            toValue:0,
+            speed:4, 
+            useNativeDriver:true,
+            bounciness:20,
+          }),
+      Animated.timing(opacity,{
+        toValue:1,
+        duration:500,
+        useNativeDriver:true, 
+
+      })    
+    ]).start();
+    
+  },[])
+
   return (
     <KeyboardAvoidingView style={style.background}>
       <View style={style.ContainerLogo}>
-        <Image 
+        <Animated.Image 
+        style={{width:55 , height:70}}
         source={require('./assets/logo.png')}
         />
       </View>
-      <View style={style.Container}>
+      <Animated.View 
+      style={[
+        style.Container,
+        {
+          opacity:opacity,
+          transform:[
+            {
+              translateY:offset.y
+            }
+          ]
+        }
+      ]}
+      
+      >
         <TextInput
            style={style.input}
           placeholder="Email"
@@ -31,7 +77,7 @@ export default function App() {
         <TouchableOpacity style={style.btnRegister}>
           <Text style={style.registerText}>Criar conta graituita</Text>
         </TouchableOpacity>
-      </View>
+      </Animated.View>
     </KeyboardAvoidingView>
     
   );
@@ -42,7 +88,8 @@ const style = StyleSheet.create({
     flex:1,
     alignItems:'center',
     justifyContent:'center',
-    backgroundColor: '#191919',
+    backgroundColor: '#191919'
+    
 
   },
   ContainerLogo:{
