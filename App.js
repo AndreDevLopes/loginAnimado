@@ -40,7 +40,7 @@ export default function App() {
     <KeyboardAvoidingView style={style.background}>
       <View style={style.ContainerLogo}>
         <Animated.Image 
-        style={{width:55 , height:70}}
+        style={{width:100 , height:70}}
         source={require('./assets/logo.png')}
         />
       </View>
@@ -62,11 +62,13 @@ export default function App() {
            style={style.input}
           placeholder="Email"
           autoCorrect={false}
+          placeholderTextColor='#939'
           onChangeText={()=>{}}
         />
         <TextInput
         style={style.input}
           placeholder="Senha"
+          placeholderTextColor='#939'
           autoCorrect={false}
           onChangeText={()=>{}}
         />
@@ -88,7 +90,7 @@ const style = StyleSheet.create({
     flex:1,
     alignItems:'center',
     justifyContent:'center',
-    backgroundColor: '#191919'
+    backgroundColor: '#FFF'
     
 
   },
@@ -105,16 +107,16 @@ const style = StyleSheet.create({
 
   },
   input:{
-    backgroundColor:'#FFF',
+    backgroundColor:'#f8f8ff',
     width:'90%',
     marginBottom:15,
-    color:'#222',
+    color:'#FFF',
     fontSize:17,
     borderRadius:7,
     padding:10,
   },
   btnSubmit:{
-    backgroundColor:'#35AAF1',
+    backgroundColor:'#939',
     width:'90%',
     height:45,
     alignItems:'center',
@@ -131,6 +133,6 @@ const style = StyleSheet.create({
     marginTop:10,
   },
   registerText:{
-    color:'#fff'
+    color:'#939'
   }
 });
